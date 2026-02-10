@@ -1,19 +1,19 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page,expect
 
-class LoginPage:
-    def __init__(self, page: Page):
+class LoginPage(Page):
+    def __init__(self, page):
         self.page = page
+        self.username_input = page.get_by_placeholder("Username")
+        self.password_input = page.get_by_placeholder("Password")
+        self.login_button = page.get_by_role("button", name="Login")
+        # self.error_message = page.get_by_role("p", name="Invalid credentials")
+        # self.error_message = page.get_by_text("Invalid credentials")
+        self.error_message = page.locator(".oxd-text.oxd-text--p.oxd-alert-content-text")
 
-    def open(self):
-        self.page.goto("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+    def navigate(self):
+        self.page.goto("/")
 
-    def login(self, username, password):
-        self.page.fill("input[name='username']", username)
-        self.page.fill("input[name='password']", password)
-        self.page.click("button[type='submit']")
-
-    def verify_login_success(self):
-        expect(self.page.locator("role=link[name='My Info']")).to_be_visible()
-
-    def verify_login_failure(self):
-        expect(self.page.locator("text=Invalid credentials")).to_be_visible()
+    def login(self, user, pwd):
+        self.username_input.fill(user)
+        self.password_input.fill(pwd)
+        self.login_button.click()
