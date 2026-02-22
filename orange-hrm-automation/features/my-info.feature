@@ -7,6 +7,6 @@ Feature: MyInfo - Personal Details
 
 
   Scenario: Verify ESS user is able to edit Personal Details page
-    Given the user is logged into OrangeHRM as an ESS user with username "ravimb1" and password "RaviM1B1"
+    Given the user is logged into OrangeHRM as an ESS user with username "virat123" and password "virat123"
     When the user clicks on the My Info tab
     Then the user should be able to edit fields license expiry "2035-11-02" and Nationality
