@@ -24,9 +24,9 @@ def verify_personal_details(page):
     expect(page).to_have_url(re.compile(r".*PersonalDetails.*"))
 
 
-@then(parsers.parse('the user should be able to edit fields license expiry "{le}" and Nationality'))
-def edit_fields(page, le):
+@then(parsers.parse('the user should be able to edit fields license expiry "{temp}" and Nationality'))
+def edit_fields(page, temp):
     page = MyInfoPage(page)
-    page.personalDetails_licenseExpiryDate.fill(le)
+    page.personalDetails_licenseExpiryDate.fill(temp)
     page.select_nationality_dropdown()
-    expect(page.personalDetails_licenseExpiryDate).to_have_value(le)
+    expect(page.personalDetails_licenseExpiryDate).to_have_value(temp)
